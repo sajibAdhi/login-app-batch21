@@ -1,135 +1,130 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(LoginApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class LoginApp extends StatelessWidget {
+  const LoginApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: "Nunito"),
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          body: LoginPage(),
-        ),
+      theme: ThemeData(
+        fontFamily: "Nunito",
       ),
+      debugShowCheckedModeBanner: false,
+      home: Login(),
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginState createState() => _LoginState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  int _pageState = 0;
-  var _backgroundColor = Colors.white;
-  var _headingColor = Color(0xFFB40284A);
-
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    switch (_pageState) {
-      case 0:
-        _backgroundColor = Color(0xFFBd5d3e9);
-        _headingColor = Color(0xFFB40284A);
-        break;
-      case 1:
-      case 2:
-        _backgroundColor = Color(0xFFBd34C59);
-        _headingColor = Colors.white;
-        break;
-    }
-    return AnimatedContainer(
-      curve: Curves.fastLinearToSlowEaseIn,
-      duration: Duration(
-        microseconds: 3000,
-      ),
-      color: _backgroundColor,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          /**
-             * Header Texts Section
-             */
-          Container(
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 100),
-                  child: Text(
-                    "Learn Flutter",
-                    style: TextStyle(
-                      color: _headingColor,
-                      fontSize: 28,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color(0xFFBd5d3e9),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                  padding: const EdgeInsets.only(
+                      left: 20, top: 80, right: 20, bottom: 20),
+                  child: Container(
+                    child: Center(
+                      child: Text(
+                        'Log In',
+                        style: new TextStyle(
+                          fontSize: 30.0,
+                          color: Colors.black87,
+                        ),
+                      ),
                     ),
+                  )),
+              Container(
+                padding: const EdgeInsets.only(
+                    left: 20, top: 10, right: 20, bottom: 10),
+                child: Container(
+                  child: Image(
+                    image: AssetImage('assets/images/welcome_image.png'),
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: 230,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.all(20),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 32,
-                  ),
-                  child: Text(
-                    "We make learning Easy,Join \n'Apps Development Training - Cross Platform,\n Under ICT Division' \nfor Free",
-                    style: TextStyle(
-                      color: _headingColor,
-                      fontSize: 16,
+              ),
+              Container(
+                padding: const EdgeInsets.all(20),
+                child: TextField(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.person),
+                    labelText: 'User Name',
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide:
+                          const BorderSide(color: Colors.blue, width: 1.0),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          /**
-             * Image Section
-             */
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 50),
-            child: Center(
-              child: Image.asset("assets/images/welcome_image.png"),
-            ),
-          ),
-          /**
-             * Footer Button
-             */
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                if (_pageState != 0)
-                  _pageState = 0;
-                else
-                  _pageState = 1;
-              });
-            },
-            child: Container(
-              child: Container(
-                margin: EdgeInsets.all(30),
-                padding: EdgeInsets.all(20),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Color(0xFFB40284A),
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: Center(
-                  child: Text(
-                    "Get Started",
-                    style: TextStyle(
-                      color: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(
+                          color: Colors.lightGreen, width: 1.0),
                     ),
                   ),
                 ),
               ),
-            ),
+              Container(
+                padding: const EdgeInsets.all(20),
+                child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.phonelink_lock),
+                    labelText: 'Password',
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide:
+                          const BorderSide(color: Colors.blue, width: 1.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: const BorderSide(
+                          color: Colors.lightGreen, width: 1.0),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(20),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
